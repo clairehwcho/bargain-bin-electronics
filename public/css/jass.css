@@ -404,6 +404,7 @@ p {
 ul,
 ol,
 dl {
+  list-style: none;
   margin-top: 0;
   margin-bottom: 1rem;
 }
@@ -419,14 +420,12 @@ button {
   margin: 0;
 }
 
-a {
-  color: #1b89bc;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #065b83;
-  text-decoration: underline;
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: unset;
+    text-decoration: none;
 }
 
 /* HEIGHT / WIDTH UTILS */

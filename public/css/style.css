@@ -7,3 +7,38 @@
     --highlight2: #E7BB41;
     --border-radius: 7px;
 }
+
+header {
+    width: 100%;
+    height: 30%;
+}
+
+.search-container {
+    display: flex;
+    width: 35%;
+}
+
+.header-nav {
+    display: flex;
+    width: 30%;
+}
+
+.header-nav ul {
+    width: 100%;
+}
+
+.index-main-row {
+    width: 100%;
+}
+
+.index-category-card {
+    width: 200px;
+    height: 250px;
+}
+
+.category-image {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
