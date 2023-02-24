@@ -1,8 +1,17 @@
-<nav>
-    Marketplace sub menu goes here
-</nav>
-<div>
-    {{#each products as |product|}}
-    {{> product-card}}
-    {{/each}}
-</div>
+<section class="marketplace-wrapper display-flex">
+    <nav class="marketplace-nav">
+        <h5>Category</h5>
+        <ul>
+            <li>Category name</li>
+            <li>Category name</li>
+            <li>Category name</li>
+            <li>Category name</li>
+            <li>Category name</li>
+        </ul>
+    </nav>
+    <div class="marketplace-card-container">
+        {{#each products as |product|}}
+        {{> product-card}}
+        {{/each}}
+    </div>
+</section>

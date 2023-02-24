@@ -42,3 +42,13 @@ header {
     border: 1px solid black;
     border-radius: 50%;
 }
+
+.marketplace-nav {
+    width: 20%;
+    border: 1px solid black;
+}
+
+.profile-nav {
+    width: 20%;
+    border: 1px solid black;
+}
