@@ -5,5 +5,12 @@
         "condition": "Brand new",
         "description": "This is iPhone 13 in the original package.",
         "user_id": 1
+    },
+    {
+        "name": "Asus Computer Monitor",
+        "price": 50,
+        "condition": "Used",
+        "description": "Used and dented Asus Monitor",
+        "user_id": 2
     }
 ]
