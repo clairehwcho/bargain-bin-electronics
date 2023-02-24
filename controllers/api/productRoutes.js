@@ -23,6 +23,7 @@ router.post('/', withAuth, async (req, res) => {
       price: req.body.price,
       condition: req.body.condition,
       description: req.body.description,
+      category: req.body.category,
       user_id: req.session.user_id,
     });
 
