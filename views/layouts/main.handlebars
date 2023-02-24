@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bargain Bin Electronics</title>
+    <link rel="stylesheet" href="/css/jass.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="flex-column justify-space-around">
+        <header>
+            <div class="display-flex justify-space-between align-center p-2">
+                <h1>
+                    <a href="/">Bargain Bin Electronics</a>
+                </h1>
+                <div class="searchBarContainer">
+                    <form class="searchForm">
+                        <input type="text" class="form-control" id="searchInputField" placeholder="Search" />
+                        <button class="search_btn">
+                            <span>SEARCH</span>
+                        </button>
+                    </form>
+                </div>
+                <nav>
+                    <!-- Conditionally render login or logout links -->
+                    {{#if logged_in}}
+                    <a href="/profile">Profile</a>
+                    <a href="/logout" id="logout">Sign out</a>
+                    <a href="/wishlist">Wishlist</a>
+                    <a href="/cart">Cart</a>
+                    {{else}}
+                    <a href="/login">Sign in</a>
+                    <a href="/register">Register</a>
+                    <a href="/cart">Cart</a>
+                    {{/if}}
+                </nav>
+            </div>
+            <nav>
+                <ul class="display-flex justify-space-around align-center">
+                    <a href="/">
+                        <li>Home</li>
+                    </a>
+                    <a href="/marketplace">
+                        <li>Marketplace</li>
+                    </a>
+                    <a href="/contactus">
+                        <li>Contact us</li>
+                    </a>
+                </ul>
+            </nav>
+        </header>
+        <main class="container container-fluid display-flex mt-5">
+            <!-- Render the sub layout -->
+            {{{ body }}}
+        </main>
+        <footer>
+
+        </footer>
+    </div>
+
+    <!-- Render script for logged in users only -->
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
+</body>
+
+</html>

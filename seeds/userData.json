@@ -1,0 +1,20 @@
+[
+  {
+    "first_name": "Claire",
+    "last_name": "Cho",
+    "username": "claire123",
+    "email": "claire@gmail.com",
+    "password": "1234",
+    "address": "Bellevue, WA",
+    "phone_numbers": "0123456789"
+  },
+  {
+    "first_name": "John",
+    "last_name": "Doe",
+    "username": "tester1",
+    "email": "test@gmail.com",
+    "password": "1234",
+    "address": "Seattle, WA",
+    "phone_numbers": "0123456789"
+  }
+]
