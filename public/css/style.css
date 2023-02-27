@@ -6,6 +6,7 @@
     --highlight1: #008DD5;
     --highlight2: #F56476;
     --border-radius: 7px;
+    --box-shadow: rgba(0, 0, 0, 0.529) 0px 5px 15px 0px;
 }
 
 * {
@@ -41,7 +42,7 @@ body {
 
 header {
     width: 100%;
-    height: 30%;
+    height: 15vh;
     color: var(--light);
 }
 
@@ -132,6 +133,7 @@ header {
 
 main {
     width: 100%;
+    min-height: 80vh;
 }
 
 .index-main-row {
@@ -181,15 +183,45 @@ main {
     text-decoration: underline;
 }
 
+.marketplace-wrapper {
+    width: 100%;
+}
 
 .marketplace-nav {
     width: 20%;
-    border: 1px solid black;
+    background-color: var(--light);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+}
+
+.marketplace-nav h6 {
+    font-weight: bold;
+}
+
+.marketplace-nav ul {
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.marketplace-nav li {
+    font-size: 0.9rem;
+    margin: 1rem 0;
+}
+
+.marketplace-nav li:hover {
+    color: var(--highlight1);
+    font-weight: bold;
+}
+
+.marketplace-card-container {
+    padding: 0 2rem;
 }
 
 footer {
     width: 100%;
-    height: 5%;
+    height: 5vh;
     font-size: 0.7rem;
     color: var(--light);
     background-color: var(--base);
