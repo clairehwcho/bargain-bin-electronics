@@ -116,7 +116,7 @@ router.get('/marketplace', withAuth, async (req, res) => {
   }
 });
 
-router.get('/contactus', withAuth, async (req, res) => {
+router.get('/contactus', async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
