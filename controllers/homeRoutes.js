@@ -116,18 +116,21 @@ router.get('/marketplace', withAuth, async (req, res) => {
   }
 });
 
-router.get('/contactus', withAuth, async (req, res) => {
+router.get('/contactus', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+    const productData = await Product.findAll({
+      include: [
+        {
+          model: User
+        },
+      ],
     });
 
-    const user = userData.get({ plain: true });
+    const products = productData.map((product) => product.get({ plain: true }));
 
     res.render('contact-us', {
-      ...user,
-      logged_in: true
+      products,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
