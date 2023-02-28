@@ -54,4 +54,22 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
+//edit a listing
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+  const productData = await Product.findByPk(req.params.id);
+    const productUpdate = productData.update({
+      ...req.body,
+    });
+
+    req.session.save(() => {
+      res.status(200).json(productUpdate);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
 module.exports = router;
