@@ -28,9 +28,17 @@
             </a>
         </ul>
     </nav>
-    <div class="marketplace-card-container">
-        {{#each products as |product|}}
-        {{> product-card}}
-        {{/each}}
+    <div class="marketplace-main">
+        <div class="marketplace-main-row display-flex justify-space-between align-center">
+            <p>Sort by: Newest</p>
+            <a href="/marketplace/new">
+                <button class="sell-button button-1">+ Create a new listing</button>
+            </a>
+        </div>
+        <div class="marketplace-main-row">
+            {{#each products as |product|}}
+            {{> product-card}}
+            {{/each}}
+        </div>
     </div>
 </section>

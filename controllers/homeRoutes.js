@@ -116,6 +116,24 @@ router.get('/marketplace', withAuth, async (req, res) => {
   }
 });
 
+router.get('/marketplace/new', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Product }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('create-listing', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/contactus', async (req, res) => {
   try {
     const productData = await Product.findAll({
