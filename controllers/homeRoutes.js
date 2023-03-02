@@ -155,7 +155,6 @@ router.get('/marketplace/product/:id', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
     const product = productData.get({ plain: true });
-    console.log(product);
 
     res.render('product-details', {
       ...user,

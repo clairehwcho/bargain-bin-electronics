@@ -33,5 +33,12 @@
         "condition": "Good",
         "description": "4k waterproof action camera",
         "category": "Camera, Photo &amp; Video"
+    },
+    {
+        "name": "Lenovo Smart Tab",
+        "price": 80,
+        "condition": "Good",
+        "description": "64GB storage and 10.3-inches of screen",
+        "category": "Computers &amp; Tablets"
     }
 ]

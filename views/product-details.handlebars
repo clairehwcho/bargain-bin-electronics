@@ -10,7 +10,7 @@
                     <li class="product-details-name">{{product.name}}</li>
                     <li class="product-details-price">${{product.price}}</li>
                     <li class="product-details-category">{{format_category product.category}}</li>
-                    <li class="product-details-username">Listed by "seller's username"</li>
+                    <li class="product-details-username">Listed by {{product.user.username}}</li>
                     <li class="product-details-date">Listed on {{format_date product.date_created}}</li>
                     <li class="product-details-condition">Condition: {{product.condition}}</li>
                     <li class="product-details-description">{{product.description}}</li>
