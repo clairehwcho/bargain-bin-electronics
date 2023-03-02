@@ -22,7 +22,7 @@ const viewCart = async (event) => {
   });
 
   if (response.ok) {
-    console.log("item added to cart");
+    document.location.replace('/cart');
   }
    else {
     alert(response.statusText);
@@ -31,9 +31,9 @@ const viewCart = async (event) => {
 }
 
 document
-  .querySelector('#addToCart')
+  .getElementById('addToCart')
   .addEventListener('click', addToCart);
 
 document
-  .querySelector('#viewCart')
+  .getElementById('viewCart')
   .addEventListener('click', viewCart);

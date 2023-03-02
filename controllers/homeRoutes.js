@@ -66,7 +66,7 @@ router.get('/cart', withAuth, async (req, res) => {
   try {
     const cartData = await Product.findAll({
       where: {
-        id: req.session.cart,
+        id: [req.session.cart],
       }
     });
 
