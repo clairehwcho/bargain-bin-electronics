@@ -32,6 +32,10 @@ Product.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    category:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {

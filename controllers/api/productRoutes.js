@@ -23,6 +23,7 @@ router.post('/', withAuth, async (req, res) => {
       price: req.body.price,
       condition: req.body.condition,
       description: req.body.description,
+      category: req.body.category,
       user_id: req.session.user_id,
     });
 
@@ -52,5 +53,23 @@ router.delete('/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//edit a listing
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+  const productData = await Product.findByPk(req.params.id);
+    const productUpdate = productData.update({
+      ...req.body,
+    });
+
+    req.session.save(() => {
+      res.status(200).json(productUpdate);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 
 module.exports = router;
