@@ -1,4 +1,4 @@
-<a href="/product/{{id}}">
+<a href="">
     <div class="product-card flex-column justify-center align-center m-1 p-2">
         <div class="card-header p-2">
             <p>Placeholder for category image</p>
@@ -9,6 +9,10 @@
                 <li class="card-body-price">${{price}}</li>
                 <li class="card-body-condition">{{condition}}</li>
             </ul>
+        </div>
+        <div class="card-footer display-flex justify-space-between align-center">
+            <button class="addToCart button-1" data-product_id="{{id}}">Add to cart</button>
+            <button class="addToCart button-1" data-product_id="{{id}}">Add to wishlist</button>
         </div>
     </div>
 </a>

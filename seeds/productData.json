@@ -4,13 +4,15 @@
         "price": 100,
         "condition": "Brand new",
         "description": "This is iPhone 13 in the original package.",
+        "category": "Cell Phones &amp; Accessories",
         "user_id": 1
     },
     {
         "name": "Asus Computer Monitor",
         "price": 50,
-        "condition": "Used",
+        "condition": "Good",
         "description": "Used and dented Asus Monitor",
+        "category": "Computers &amp; Tablets",
         "user_id": 2
     }
 ]
