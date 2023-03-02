@@ -1,37 +1,9 @@
 <section class="marketplace-wrapper display-flex">
-    <nav class="marketplace-nav flex-column justify-flex-start">
-        <h6>CATEGORIES</h6>
-        <ul>
-            <a href="">
-                <li>TV & Home Theater</li>
-            </a>
-            <a href="">
-                <li>Computers & Tablets</li>
-            </a>
-            <a href="">
-                <li>Camera, Photo & Video</li>
-            </a>
-            <a href="">
-                <li>Cell Phones & Accessories</li>
-            </a>
-            <a href="">
-                <li>Headphones & Audio</li>
-            </a>
-            <a href="">
-                <li>Car Electronics</li>
-            </a>
-            <a href="">
-                <li>Health & Wellness</li>
-            </a>
-            <a href="">
-                <li>Wearable Technology</li>
-            </a>
-        </ul>
-    </nav>
+    {{> marketplace-nav}}
     <div class="marketplace-main">
         <div class="marketplace-main-row display-flex justify-space-between align-center">
             <p>Sort by: Newest</p>
-            <a href="/marketplace/new">
+            <a href="/marketplace/product/new">
                 <button class="sell-button button-1">+ Create a new listing</button>
             </a>
         </div>

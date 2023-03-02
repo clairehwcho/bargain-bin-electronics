@@ -3,21 +3,10 @@ const { Product, User } = require('../models');
 const withAuth = require('../utils/auth');
 const { return_cart_array } = require('../utils/helpers');
 
-
+// Render homepage
 router.get('/', async (req, res) => {
   try {
-    const productData = await Product.findAll({
-      include: [
-        {
-          model: User
-        },
-      ],
-    });
-
-    const products = productData.map((product) => product.get({ plain: true }));
-
     res.render('homepage', {
-      products,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -25,27 +14,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/product/:id', async (req, res) => {
-  try {
-    const productData = await Product.findByPk(req.params.id, {
-      include: [
-        {
-          model: User
-        },
-      ],
-    });
-
-    const product = productData.get({ plain: true });
-
-    res.render('product-details', {
-      ...product,
-      logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
+// Render profile page
 router.get('/profile', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -64,25 +33,26 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
+// Render cart page
 router.get('/cart', withAuth, async (req, res) => {
   const cart = JSON.parse(return_cart_array);
-console.log(cart);
-  if(cart){
-  try {
-    const cartData = await Product.findAll({
-      where: {
-        id: cart,
-      }
-    });
-    const cart_items = cartData.map((product) => product.get({ plain: true }));
+  console.log(cart);
+  if (cart) {
+    try {
+      const cartData = await Product.findAll({
+        where: {
+          id: cart,
+        }
+      });
+      const cart_items = cartData.map((product) => product.get({ plain: true }));
 
-    res.render('cart', {
-      ...cart_items,
-      logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+      res.render('cart', {
+        ...cart_items,
+        logged_in: true
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
   }
 });
 
@@ -100,6 +70,7 @@ console.log(cart);
 //   }
 // });
 
+// Render wishlist page
 router.get('/wishlist', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -118,6 +89,7 @@ router.get('/wishlist', withAuth, async (req, res) => {
   }
 });
 
+// Get all products for marketplace page
 router.get('/marketplace', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -125,18 +97,29 @@ router.get('/marketplace', withAuth, async (req, res) => {
       include: [{ model: Product }],
     });
 
+    const productData = await Product.findAll({
+      include: [
+        {
+          model: User
+        },
+      ],
+    });
+
     const user = userData.get({ plain: true });
+    const products = productData.map((product) => product.get({ plain: true }));
 
     res.render('marketplace', {
       ...user,
-      logged_in: true
+      products,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/marketplace/new', withAuth, async (req, res) => {
+// Render create a new listing page
+router.get('/marketplace/product/new', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
@@ -147,13 +130,44 @@ router.get('/marketplace/new', withAuth, async (req, res) => {
 
     res.render('create-listing', {
       ...user,
-      logged_in: true
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+// Get one product
+router.get('/marketplace/product/:id', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Product }],
+    });
+
+    const productData = await Product.findByPk(req.params.id, {
+      include: [
+        {
+          model: User
+        },
+      ],
+    });
+
+    const user = userData.get({ plain: true });
+    const product = productData.get({ plain: true });
+    console.log(product);
+
+    res.render('product-details', {
+      ...user,
+      product,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Render contact us page
 router.get('/contactus', async (req, res) => {
   try {
     const productData = await Product.findAll({
@@ -175,6 +189,7 @@ router.get('/contactus', async (req, res) => {
   }
 });
 
+// Render login page
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/profile');
@@ -184,6 +199,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// Render register page
 router.get('/register', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/profile');

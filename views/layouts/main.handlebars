@@ -19,14 +19,14 @@
         <div class="header-top-row display-flex justify-space-between align-center p-3">
             <div class="logo-container">
                 <a href="/" class="display-flex justify-flex-start align-center">
-                    <img src="images/logo.png" alt="logo">
+                    <img src="/images/logo.png" alt="logo">
                     <h3>Bargain Bin Electronics</h3>
                 </a>
             </div>
 
             <div class="search-container">
                 <form class="search-form display-flex">
-                    <input type="text" class="search-input" placeholder="Search items" />
+                    <input type="text" class="search-input" id="search-input" placeholder="Search items" />
                     <button class="search-button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-search" viewBox="0 0 16 16">
@@ -111,7 +111,8 @@
     {{#if logged_in}}
     <script src="/js/logout.js"></script>
     {{/if}}
-    <script src="./js/cart.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/cart.js"></script>
 </body>
 
 </html>
