@@ -15,6 +15,7 @@ const addToCart = async (event) => {
 }
 
 const viewCart = async (event) => {
+  const product_id = event.target.getAttribute(data-product_id);
   const response = await fetch('/cart', {
     method: 'GET',
     body: JSON.stringify({product_id}),
