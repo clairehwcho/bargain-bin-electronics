@@ -1,24 +1,24 @@
 const addToCart = async (event) => {
-  const response = await fetch('/cart', {
-    method: 'POST',
-    body: JSON.stringify({product_id}),
-    headers: { 'Content-Type': 'application/json' },
-  });
+  let product_id = event.target.dataset.product_id;
+  console.log(product_id);
 
-  if (response.ok) {
-    console.log("item added to cart");
-  }
-   else {
-    alert(response.statusText);
-  }
 
+	if (localStorage.getItem('shopping-cart')) {
+		cartArray = JSON.parse(localStorage.getItem('shopping-cart'));
+	}
+  else{  var cartArray = new Array();}
+  cartArray.push(product_id);
+  
+  console.log(cartArray);
+  var cartJSON = JSON.stringify(cartArray);
+	localStorage.setItem('cartArray', cartJSON);
 }
 
-const viewCart = async (event) => {
-  const product_id = event.target.getAttribute(data-product_id);
+const viewCart = async () => {
+	if (localStorage.getItem('cartArray')) {
+
   const response = await fetch('/cart', {
-    method: 'GET',
-    body: JSON.stringify({product_id}),
+    method: 'GET', 
     headers: { 'Content-Type': 'application/json' },
   });
 
@@ -28,13 +28,16 @@ const viewCart = async (event) => {
    else {
     alert(response.statusText);
   }
-    
+}
 }
 
-document
-  .getElementById('addToCart')
-  .addEventListener('click', addToCart);
+var addToCartElem = document.querySelectorAll('.addToCart');
 
-document
-  .getElementById('viewCart')
-  .addEventListener('click', viewCart);
+for (let i = 0; i < addToCartElem.length; i++) {
+  const element = addToCartElem[i];
+  element.addEventListener('click', addToCart);
+}
+
+// document
+//   .getElementById('viewCart')
+//   .addEventListener('click', viewCart);

@@ -7,4 +7,7 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
+  return_cart_array: () =>{
+    return JSON.parse(req.localStorage.getItem(cartArray));
+  }
 };

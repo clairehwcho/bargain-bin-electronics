@@ -62,38 +62,6 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
-router.get('/cart', withAuth, async (req, res) => {
-  try {
-    const cartData = await Product.findAll({
-      where: {
-        id: [req.session.cart],
-      }
-    });
-
-    const cart = cartData.get({ plain: true });
-
-    res.render('cart', {
-      ...cart,
-      logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.post('/cart', withAuth, async (req, res) => {
-  try {
-    const productData = await Product.findByPk(req.body.product_id, {
-      include: [{ model: User }],
-    });
-    if(productData){
-    var cart = req.session.cart || [];  
-    cart.push(req.body.itemId);
-    }
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 router.get('/wishlist', withAuth, async (req, res) => {
   try {
