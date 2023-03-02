@@ -367,8 +367,8 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 0.5rem;
   line-height: 1.25;
+  margin: 0;
 }
 
 h1 {
@@ -397,15 +397,13 @@ h6 {
 
 p {
   font-size: 1.1rem;
-  margin: 0 0 1rem;
-  line-height: 1.5;
 }
 
 ul,
 ol,
 dl {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  list-style: none;
+  margin: 0;
 }
 
 label {
@@ -419,14 +417,12 @@ button {
   margin: 0;
 }
 
-a {
-  color: #1b89bc;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #065b83;
-  text-decoration: underline;
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: unset;
+    text-decoration: none;
 }
 
 /* HEIGHT / WIDTH UTILS */
