@@ -1,8 +1,8 @@
 <section class="marketplace-wrapper display-flex">
-    {{> marketplace-nav}}
+    {{> marketplace-side-nav}}
     <div class="marketplace-main">
-        {{> marketplace-main-row}}
-        <div class="marketplace-main-row display-flex flex-wrap">
+        {{> marketplace-main-top-row}}
+        <div class="marketplace-main-bottom-row display-flex flex-wrap justify-space-between">
             {{#each products as |product|}}
             {{> product-card}}
             {{/each}}
