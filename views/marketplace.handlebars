@@ -1,12 +1,7 @@
 <section class="marketplace-wrapper display-flex">
     {{> marketplace-nav}}
     <div class="marketplace-main">
-        <div class="marketplace-main-row display-flex justify-space-between align-center">
-            <p>Sort by: Newest</p>
-            <a href="/marketplace/product/new">
-                <button class="sell-button button-1">+ Create a new listing</button>
-            </a>
-        </div>
+        {{> marketplace-main-row}}
         <div class="marketplace-main-row display-flex flex-wrap">
             {{#each products as |product|}}
             {{> product-card}}

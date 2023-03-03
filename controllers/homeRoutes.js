@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Product, User } = require('../models');
 const withAuth = require('../utils/auth');
-const { return_cart_array } = require('../utils/helpers');
+const { format_category_url, return_cart_array } = require('../utils/helpers');
 
 // Render homepage
 router.get('/', async (req, res) => {
@@ -159,6 +159,36 @@ router.get('/marketplace/product/:id', withAuth, async (req, res) => {
     res.render('product-details', {
       ...user,
       product,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Get all products of each category
+router.get('/marketplace/:category', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Product }],
+    });
+
+    const productData = await Product.findAll({
+      where: { category: format_category_url(req.params.category) },
+      include: [
+        {
+          model: User
+        },
+      ],
+    });
+
+    const user = userData.get({ plain: true });
+    const products = productData.map((product) => product.get({ plain: true }));
+
+    res.render('marketplace', {
+      ...user,
+      products,
       logged_in: req.session.logged_in
     });
   } catch (err) {

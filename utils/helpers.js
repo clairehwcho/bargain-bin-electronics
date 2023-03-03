@@ -12,5 +12,8 @@ module.exports = {
   },
   format_category: (category) => {
     return category.replace('&amp;', '&');
+  },
+  format_category_url: (url) => {
+    return url.replace('%20', ' ').replace('&', '&amp;');
   }
 };
