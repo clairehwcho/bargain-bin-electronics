@@ -40,5 +40,26 @@
         "condition": "Good",
         "description": "64GB storage and 10.3-inches of screen",
         "category": "Computers &amp; Tablets"
+    },
+    {
+        "name": "Beats by Dr.Dre Headphones",
+        "price": 130,
+        "condition": "Brand New",
+        "description": "High performance wireless Bluetooth headphones. Never used.",
+        "category": "Headphones &amp; Audio"
+    },
+    {
+        "name": "Wireless Car Charger",
+        "price": 20,
+        "condition": "Good",
+        "description": "Combines the Wireless Charger and a car cell phone holder, allows for a secure hands-free experience.",
+        "category": "Car Electronics"
+    },
+    {
+        "name": "WalkingPad Folding Treadmill",
+        "price": 200,
+        "condition": "Excellent",
+        "description": "Ultra Slim Foldable Treadmill Smart Fold Walking Pad Portable Safety Non Holder Gym and Running Device P1 Grey 0.5-3.72MPH",
+        "category": "Health &amp; Wellness"
     }
 ]
