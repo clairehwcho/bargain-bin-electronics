@@ -1,18 +1,65 @@
 [
     {
         "name": "iPhone",
-        "price": 100,
+        "price": 700,
         "condition": "Brand new",
         "description": "This is iPhone 13 in the original package.",
-        "category": "Cell Phone",
-        "user_id": 1
+        "category": "Cell Phones &amp; Accessories"
     },
     {
         "name": "Asus Computer Monitor",
         "price": 50,
-        "condition": "Used",
+        "condition": "Good",
         "description": "Used and dented Asus Monitor",
-        "category": "Monitor",
-        "user_id": 2
+        "category": "Computers &amp; Tablets"
+    },
+    {
+        "name": "Samsung Neo QLED TV",
+        "price": 1500,
+        "condition": "Excellent",
+        "description": "It's a 65\" Class QN900C Samsung Neo QLED 8K Smart TV (2023). Barely used.",
+        "category": "TV &amp; Home Theater"
+    },
+    {
+        "name": "Apple Watch Series 8",
+        "price": 100,
+        "condition": "Acceptable",
+        "description": "41mm aluminum case with sport band. S/M size. Some wear and tears on the strap.",
+        "category": "Wearable Technology"
+    },
+    {
+        "name": "GoPro HERO8 Black",
+        "price": 100,
+        "condition": "Good",
+        "description": "4k waterproof action camera",
+        "category": "Camera, Photo &amp; Video"
+    },
+    {
+        "name": "Lenovo Smart Tab",
+        "price": 80,
+        "condition": "Good",
+        "description": "64GB storage and 10.3-inches of screen",
+        "category": "Computers &amp; Tablets"
+    },
+    {
+        "name": "Beats by Dr.Dre Headphones",
+        "price": 130,
+        "condition": "Brand New",
+        "description": "High performance wireless Bluetooth headphones. Never used.",
+        "category": "Headphones &amp; Audio"
+    },
+    {
+        "name": "Wireless Car Charger",
+        "price": 20,
+        "condition": "Good",
+        "description": "Combines the Wireless Charger and a car cell phone holder, allows for a secure hands-free experience.",
+        "category": "Car Electronics"
+    },
+    {
+        "name": "WalkingPad Folding Treadmill",
+        "price": 200,
+        "condition": "Excellent",
+        "description": "Ultra Slim Foldable Treadmill Smart Fold Walking Pad Portable Safety Non Holder Gym and Running Device P1 Grey 0.5-3.72MPH",
+        "category": "Health &amp; Wellness"
     }
 ]

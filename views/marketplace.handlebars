@@ -1,36 +1,11 @@
 <section class="marketplace-wrapper display-flex">
-    <nav class="marketplace-nav flex-column justify-flex-start">
-        <h6>CATEGORIES</h6>
-        <ul>
-            <a href="">
-                <li>TV & Home Theater</li>
-            </a>
-            <a href="">
-                <li>Computers & Tablets</li>
-            </a>
-            <a href="">
-                <li>Camera, Photo & Video</li>
-            </a>
-            <a href="">
-                <li>Cell Phones & Accessories</li>
-            </a>
-            <a href="">
-                <li>Headphones & Audio</li>
-            </a>
-            <a href="">
-                <li>Car Electronics</li>
-            </a>
-            <a href="">
-                <li>Health & Wellness</li>
-            </a>
-            <a href="">
-                <li>Wearable Technology</li>
-            </a>
-        </ul>
-    </nav>
-    <div class="marketplace-card-container">
-        {{#each products as |product|}}
-        {{> product-card}}
-        {{/each}}
+    {{> marketplace-side-nav}}
+    <div class="marketplace-main">
+        {{> marketplace-main-top-row}}
+        <div class="marketplace-main-bottom-row display-flex flex-wrap justify-space-between">
+            {{#each products as |product|}}
+            {{> product-card}}
+            {{/each}}
+        </div>
     </div>
 </section>

@@ -1,6 +1,18 @@
-<div>
-    This is a partial product-card.handlebars.
-    <header>{{name}}</header>
-    <div>{{price}}</div>
-    <button  class="addToCart" data-product_id="{{id}}" >Add to cart</button>
-</div>
+<a href="/marketplace/product/{{id}}">
+    <div class="product-card flex-column justify-center align-center m-1 p-2">
+        <div class="card-header p-2">
+            <p>Placeholder for category image</p>
+        </div>
+        <div class="card-body p-2">
+            <ul>
+                <li class="card-body-name">{{name}}</li>
+                <li class="card-body-price">${{price}}</li>
+                <li class="card-body-condition">{{condition}}</li>
+            </ul>
+        </div>
+        <div class="card-footer display-flex justify-space-between align-center">
+            <button class="addToCart button-1" data-product_id="{{id}}">Add to cart</button>
+            <button class="addToCart button-1" data-product_id="{{id}}">Add to wishlist</button>
+        </div>
+    </div>
+</a>
