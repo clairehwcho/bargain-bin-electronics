@@ -1,43 +1,68 @@
-const addToCart = async (event) => {
-  let product_id = event.target.dataset.product_id;
-  console.log(product_id);
+const addToCartButtonHandler = async (event) => {
+  event.preventDefault();
 
+  const name = event.target.getAttribute('data-name');
+  const price = event.target.getAttribute('data-price');
+  const condition = event.target.getAttribute('data-condition');
+  const description = event.target.getAttribute('data-description');
+  const date_created = event.target.getAttribute('data-date_created');
+  const category = event.target.getAttribute('data-category');
+  const product_id = event.target.getAttribute('data-product_id');
+  const seller_username = event.target.getAttribute('data-seller_username');
 
-	if (localStorage.getItem('shopping-cart')) {
-		cartArray = JSON.parse(localStorage.getItem('shopping-cart'));
-	}
-  else{  var cartArray = new Array();}
-  cartArray.push(product_id);
-  
-  console.log(cartArray);
-  var cartJSON = JSON.stringify(cartArray);
-	localStorage.setItem('cartArray', cartJSON);
-}
+  if (product_id) {
+      const response = await fetch(`/api/cartProducts/${product_id}`, {
+          method: 'GET'
+      });
 
-const viewCart = async () => {
-	if (localStorage.getItem('cartArray')) {
+      if (response.ok) {
+          alert("This product is already in your cart.");
+          return;
+      };
+  };
 
-  const response = await fetch('/cart', {
-    method: 'GET', 
-    headers: { 'Content-Type': 'application/json' },
-  });
+  if (name && price && condition && description && date_created && category && product_id && seller_username) {
+      const response = await fetch('/api/cartProducts', {
+          method: 'POST',
+          body: JSON.stringify({ name, price, condition, description, date_created, category, product_id, seller_username }),
+          headers: { 'Content-Type': 'application/json' },
+      });
 
-  if (response.ok) {
-    document.location.replace('/cart');
+      if (response.ok) {
+          alert("This product is added to your cart.");
+          document.location.reload();
+      } else {
+          alert(response.statusText);
+      }
   }
-   else {
-    alert(response.statusText);
+};
+
+const removeFromCartButtonHandler = async (event) => {
+  event.preventDefault();
+
+  const id = event.target.getAttribute('data-id');
+
+  if (id) {
+      const response = await fetch(`api/cartProducts/${id}`, {
+          method: 'DELETE',
+      });
+
+      if (response.ok) {
+          document.location.reload();
+      } else {
+          alert(response.statusText);
+      }
   }
-}
-}
+};
 
-var addToCartElem = document.querySelectorAll('.addToCart');
+if (document.querySelectorAll('.add-to-cart-button')) {
+  document
+      .querySelectorAll('.add-to-cart-button')
+      .forEach(button => button.addEventListener('click', addToCartButtonHandler));
+};
 
-for (let i = 0; i < addToCartElem.length; i++) {
-  const element = addToCartElem[i];
-  element.addEventListener('click', addToCart);
-}
-
-// document
-//   .getElementById('viewCart')
-//   .addEventListener('click', viewCart);
+if (document.querySelectorAll('.remove-from-cart-button')) {
+  document
+      .querySelectorAll('.remove-from-cart-button')
+      .forEach(button => button.addEventListener('click', removeFromCartButtonHandler));
+};

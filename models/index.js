@@ -1,6 +1,7 @@
 const User = require('./User');
 const Product = require('./Product');
 const WishlistProduct = require('./WishlistProduct');
+const CartProduct = require('./CartProduct');
 
 // One user has many products
 User.hasMany(Product, {
@@ -24,4 +25,15 @@ WishlistProduct.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-module.exports = { User, Product, WishlistProduct };
+// One user has many cartProducts
+User.hasMany(CartProduct, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
+});
+
+// One cartProduct belongs to one user
+CartProduct.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+module.exports = { User, Product, WishlistProduct, CartProduct};
