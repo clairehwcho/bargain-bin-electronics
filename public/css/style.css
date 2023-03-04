@@ -33,7 +33,17 @@
     opacity: 0.8;
 }
 
-button:hover {
+.button-3 {
+    padding: 0.5rem 1rem;
+    color: var(--light);
+    background-color: var(--dark);
+    border: none;
+    border-radius: var(--border-radius);
+    opacity: 1;
+}
+
+.button-1:hover,
+.button-2:hover {
     opacity: 1;
 }
 
@@ -287,7 +297,7 @@ main {
     font-size: 1rem;
 }
 
-.card-body-price {
+#card-body-price {
     font-weight: bold;
 }
 
@@ -323,23 +333,27 @@ main {
     width: 70%;
 }
 
-.product-details-name {
+#product-details-name {
     font-size: 1.5rem;
 }
 
-.product-details-price {
+#product-details-price {
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.product-details-category,
-.product-details-username,
-.product-details-date {
+#product-details-category,
+#product-details-username,
+#product-details-date {
     font-size: 0.8rem;
 }
 
-.product-details-condition {
+#product-details-condition {
     font-size: 1rem;
+}
+
+.wishlist-wrapper {
+    width: 100%;
 }
 
 footer {

@@ -1,11 +1,16 @@
 const router = require('express').Router();
-const { Product } = require('../../models');
+const { Product, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-//get all Products
-router.get('/', async (req, res) => {
+// Get all products
+router.get('/', withAuth, async (req, res) => {
   try {
-    const productData = await Product.findAll();
+    const productData = await Product.findAll({
+      include: [{
+        model: User,
+        attributes: { exclude: ['password'] }
+      }]
+    });
     const products = productData.map((product) => product.get({ plain: true }));
 
     res.status(200).json(products);
@@ -14,7 +19,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Create a new listing
+// Create a new product
 router.post('/', withAuth, async (req, res) => {
   try {
     const newProduct = await Product.create({
@@ -33,7 +38,24 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-// Delete a listing
+// Edit a product
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const productData = await Product.findByPk(req.params.id);
+    const productUpdate = productData.update({
+      ...req.body,
+    });
+
+    req.session.save(() => {
+      res.status(200).json(productUpdate);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// Delete a product
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const productData = await Product.destroy({
@@ -53,23 +75,5 @@ router.delete('/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-//edit a listing
-router.put('/:id', withAuth, async (req, res) => {
-  try {
-  const productData = await Product.findByPk(req.params.id);
-    const productUpdate = productData.update({
-      ...req.body,
-    });
-
-    req.session.save(() => {
-      res.status(200).json(productUpdate);
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
 
 module.exports = router;

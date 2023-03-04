@@ -1,4 +1,4 @@
-<a href="/marketplace/product/{{id}}">
+<a href="/marketplace/product/{{product_id}}">
     <div class="product-card flex-column justify-center align-center m-1 p-2">
         <div class="card-header p-2">
             <p>Placeholder for category image</p>
@@ -14,16 +14,8 @@
         </div>
         <div class="card-footer display-flex justify-space-between align-center">
             <button class="addToCart button-1" data-product_id="{{id}}">Add to cart</button>
-            <button class="add-to-wishlist-button button-1"
-            data-name = "{{name}}"
-            data-price="{{price}}"
-            data-condition="{{condition}}"
-            data-description="{{description}}"
-            data-date_created="{{date_created}}"
-            data-category="{{category}}"
-            data-product_id="{{id}}"
-            data-seller_username="{{user.username}}">
-            Add to wishlist
+            <button class="remove-from-wishlist-button button-2" data-id="{{id}}">
+                Remove from wishlist
             </button>
         </div>
     </div>
