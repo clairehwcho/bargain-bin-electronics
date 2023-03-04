@@ -7,17 +7,19 @@
             </div>
             <div class="product-details">
                 <ul>
-                    <li class="product-details-name">{{product.name}}</li>
-                    <li class="product-details-price">${{product.price}}</li>
-                    <li class="product-details-category">{{format_category product.category}}</li>
-                    <li class="product-details-username">Listed by {{product.user.username}}</li>
-                    <li class="product-details-date">Listed on {{format_date product.date_created}}</li>
-                    <li class="product-details-condition">Condition: {{product.condition}}</li>
-                    <li class="product-details-description">{{product.description}}</li>
+                    <li class="product-name" id="product-details-name">{{product.name}}</li>
+                    <li class="product-price" id="product-details-price">${{product.price}}</li>
+                    <li class="product-category" id="product-details-category">{{format_category product.category}}</li>
+                    <li class="product-username" id="product-details-username">Listed by {{product.user.username}}</li>
+                    <li class="product-date" id="product-details-date">Listed on {{format_date product.date_created}}
+                    </li>
+                    <li class="product-condition" id="product-details-condition">Condition: {{product.condition}}</li>
+                    <li class="product-description" id="product-details-description">{{product.description}}</li>
                 </ul>
                 <div class="product-details-btn-container p-3">
                     <button class="button-1" data-product_id="{{product.id}}">Add to cart</button>
-                    <button class="button-1" data-product_id="{{product.id}}">Add to wishlist</button>
+                    <button class="add-to-wishlist-button button-1" data-product_id="{{product.id}}">Add to
+                        wishlist</button>
                     <a href="/marketplace"><button class="button-2">Return to
                             listings</button></a>
                 </div>
@@ -25,3 +27,5 @@
         </div>
     </div>
 </section>
+
+<script src="/js/wishlist.js"></script>

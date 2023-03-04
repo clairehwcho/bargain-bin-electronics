@@ -3,9 +3,13 @@
     <div class="marketplace-main">
         {{> marketplace-main-top-row}}
         <div class="marketplace-main-bottom-row display-flex flex-wrap justify-space-between">
+            {{#if products}}
             {{#each products as |product|}}
             {{> product-card}}
             {{/each}}
+            {{/if}}
         </div>
     </div>
 </section>
+
+<script src="/js/wishlist.js"></script>

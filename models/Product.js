@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Product extends Model {}
+class Product extends Model { }
 
 Product.init(
   {
@@ -32,7 +32,7 @@ Product.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    category:{
+    category: {
       type: DataTypes.STRING,
       allowNull: false,
     },

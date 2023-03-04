@@ -50,7 +50,7 @@ User.init(
     phone_numbers: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
+    }
   },
   {
     hooks: {
