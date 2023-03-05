@@ -1,17 +1,21 @@
-<section class="cart-wrapper display-flex flex-column align-center">
+<section class="checkout-wrapper display-flex flex-column align-center">
     <h3>Your cart</h3>
-    <div class="cart-product-container display-flex flex-wrap justify-space-between">
+    <div class="checkout-product-container display-flex flex-wrap justify-space-between">
+
         {{#if cartProducts}}
+        <table>
         {{#each cartProducts as |cartProduct|}}
-        {{> cart-card}}
+        {{> checkout-card}}
         {{/each}}
+        </table>
         {{else}}
         <p>Your cart is empty.</p>
         {{/if}}
+        
     </div>
 </section>
-    {{#if cartProducts}}
-    <button class="checkout-button button-1">Checkout</button>
-    {{/if}}
+<div class="total-container">
+    Total: 
+</div>
 <script src="/js/cart.js"></script>
 <script src="/js/checkout.js"></script>

@@ -7,13 +7,16 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
-  return_cart_array: () => {
-    return JSON.parse(req.localStorage.getItem(cartArray));
-  },
   format_category: (category) => {
     return category.replace('&amp;', '&');
   },
   format_category_url: (url) => {
     return url.replace('%20', ' ').replace('&', '&amp;');
+  },
+  sumArray: (array) => {
+    let result = array.reduce((a, b) => {
+      return a + b;
+    }, 10);
+    return result;
   }
 };

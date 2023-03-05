@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Product, User, WishlistProduct, CartProduct } = require('../models');
 const withAuth = require('../utils/auth');
-const { format_category_url} = require('../utils/helpers');
+const { format_category_url, sumArray} = require('../utils/helpers');
 
 // Render homepage
 router.get('/', async (req, res) => {
@@ -243,5 +243,40 @@ router.get('/register', (req, res) => {
 
   res.render('register');
 });
+
+//Render checkout page
+router.get('/cart/checkout', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Product }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const cartProductData = await CartProduct.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+      include: [
+        {
+          model: User
+        },
+      ],
+    });
+
+
+    const cartProducts = cartProductData.map((cartProduct) => cartProduct.get({ plain: true }));
+
+    res.render('checkout', {
+      ...user,
+      cartProducts,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 module.exports = router;
