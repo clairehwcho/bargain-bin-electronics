@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const { Product, User, WishlistProduct } = require('../models');
+const { Product, User, WishlistProduct, CartProduct } = require('../models');
 const withAuth = require('../utils/auth');
-const { format_category_url, return_cart_array } = require('../utils/helpers');
+const { format_category_url, sumArray} = require('../utils/helpers');
 
 // Render homepage
 router.get('/', async (req, res) => {
@@ -68,40 +68,36 @@ router.get('/wishlist', withAuth, async (req, res) => {
 
 // Render cart page
 router.get('/cart', withAuth, async (req, res) => {
-  const cart = JSON.parse(return_cart_array);
-  console.log(cart);
-  if (cart) {
     try {
-      const cartData = await Product.findAll({
-        where: {
-          id: cart,
-        }
+      const userData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ['password'] },
+        include: [{ model: Product }],
       });
-      const cart_items = cartData.map((product) => product.get({ plain: true }));
-
+  
+      const user = userData.get({ plain: true });
+  
+      const cartProductData = await CartProduct.findAll({
+        where: {
+          user_id: req.session.user_id,
+        },
+        include: [
+          {
+            model: User
+          },
+        ],
+      });
+  
+      const cartProducts = cartProductData.map((cartProduct) => cartProduct.get({ plain: true }));
+  
       res.render('cart', {
-        ...cart_items,
-        logged_in: true
+        ...user,
+        cartProducts,
+        logged_in: req.session.logged_in
       });
     } catch (err) {
       res.status(500).json(err);
     }
-  }
-});
-
-// router.post('/cart', withAuth, async (req, res) => {
-//   try {
-//     const productData = await Product.findByPk(req.body.product_id, {
-//       include: [{ model: User }],
-//     });
-//     if(productData){
-//     var cart = req.session.cart || [];
-//     cart.push(req.body.itemId);
-//     }
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+  });
 
 
 // Render marketplace page
@@ -247,5 +243,40 @@ router.get('/register', (req, res) => {
 
   res.render('register');
 });
+
+//Render checkout page
+router.get('/cart/checkout', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Product }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const cartProductData = await CartProduct.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+      include: [
+        {
+          model: User
+        },
+      ],
+    });
+
+
+    const cartProducts = cartProductData.map((cartProduct) => cartProduct.get({ plain: true }));
+
+    res.render('checkout', {
+      ...user,
+      cartProducts,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 module.exports = router;
