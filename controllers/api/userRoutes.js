@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const { User } = require('../../models');
+import { Router } from 'express';
+const router = Router();
+import { User } from '../../models';
 
 // Get all users
 router.get('/', async (req, res) => {
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Incorrect email or password' });
     }
 
-    const validPassword = await userData.checkPassword(password);
+    const validPassword = userData.checkPassword(password);
 
     if (!validPassword) {
       return res.status(400).json({ message: 'Incorrect email or password' });
@@ -80,4 +80,4 @@ router.post('/logout', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
