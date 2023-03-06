@@ -235,9 +235,11 @@ router.get('/marketplace/:category', withAuth, async (req, res) => {
 });
 
 // Render contact us page
-router.get('/contact', (req, res) => {
+router.get('/contact-us', async (req, res) => {
   try {
-    res.render('contact-us');
+    res.render('contact-us', {
+      logged_in: req.session.logged_in
+    });
   } catch (err) {
     res.status(500).json(err);
   }

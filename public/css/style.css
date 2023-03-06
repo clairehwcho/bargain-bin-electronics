@@ -254,7 +254,8 @@ main {
 }
 
 .profile-side-nav ul,
-.marketplace-side-nav ul {
+.marketplace-side-nav ul,
+.contact-us-wrapper ul {
     list-style-position: inside;
     padding-left: 0;
 }
@@ -395,6 +396,45 @@ main {
 .my-account {
     list-style: circle;
     line-height: 2;
+}
+
+.contact-us-wrapper {
+    width: 100%;
+}
+
+
+.contact-us-wrapper ul {
+    width: fit-content;
+    line-height: 2;
+
+}
+
+.contact-us-wrapper li {
+    width: fit-content;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.contact-us-wrapper li:hover {
+    color: var(--highlight1);
+}
+
+.contact-us-wrapper img {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.contact-us-wrapper p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.contact-us-wrapper p:last-of-type {
+    font-size: 1.1rem;
 }
 
 footer {
