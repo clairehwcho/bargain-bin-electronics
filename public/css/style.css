@@ -125,6 +125,7 @@ header {
 
 .profile-nav ul {
     width: 100%;
+
 }
 
 .profile-nav li:hover {
@@ -201,10 +202,12 @@ main {
     text-decoration: underline;
 }
 
+.profile-wrapper,
 .marketplace-wrapper {
     width: 100%;
 }
 
+.profile-side-nav,
 .marketplace-side-nav {
     width: 20%;
     background-color: var(--light);
@@ -214,25 +217,29 @@ main {
     padding: 1.5rem;
 }
 
+.profile-side-nav h6,
 .marketplace-side-nav h6 {
     font-weight: bold;
 }
 
+.profile-side-nav ul,
 .marketplace-side-nav ul {
     list-style-position: inside;
     padding-left: 0;
 }
 
-.marketplace-side-nav li {
+.profile-side-nav li .marketplace-side-nav li {
     font-size: 0.9rem;
     margin: 1rem 0;
 }
 
+.profile-side-nav li:hover,
 .marketplace-side-nav li:hover {
     color: var(--highlight1);
     font-weight: bold;
 }
 
+.profile-main,
 .marketplace-main {
     width: 80%;
     display: flex;
@@ -354,6 +361,11 @@ main {
 
 .wishlist-wrapper {
     width: 100%;
+}
+
+.my-account {
+    list-style: circle;
+    line-height: 2;
 }
 
 footer {
