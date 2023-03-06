@@ -359,11 +359,10 @@ main {
 .category-image {
     width: 30%;
     height: 100%;
-    color: var(--light);
-    background-color: var(--medium);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.category-image img {
+    width: 100%;
 }
 
 .product-details {
