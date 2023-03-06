@@ -155,9 +155,16 @@ main {
 }
 
 .index-main-row {
-    width: 70%;
+    width: 700px;
     flex-wrap: wrap;
-    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.index-main-row:first-of-type {
+    color: var(--light);
+    background-color: var(--highlight1);
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
 }
 
 .index-category-image {
@@ -166,6 +173,11 @@ main {
     background-position: center;
     background-size: cover;
     border-radius: 50%;
+}
+
+.index-category-card:hover {
+    transform: translate(3px, 3px);
+    transition: all 0.3s;
 }
 
 .index-category-card p {
