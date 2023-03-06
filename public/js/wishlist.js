@@ -66,3 +66,4 @@ if (document.querySelectorAll('.remove-from-wishlist-button')) {
         .querySelectorAll('.remove-from-wishlist-button')
         .forEach(button => button.addEventListener('click', removeFromWishlistButtonHandler));
 };
+
