@@ -14,8 +14,10 @@
         
     </div>
 </section>
+{{#if cartProducts}}
 <div class="total-container">
-    Total: 
+    Total: $<div id="checkout_total"></div>
 </div>
+{{/if}}
 <script src="/js/cart.js"></script>
 <script src="/js/checkout.js"></script>
