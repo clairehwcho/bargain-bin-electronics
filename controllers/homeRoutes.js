@@ -264,8 +264,7 @@ router.get('/cart/checkout', withAuth, async (req, res) => {
         },
       ],
     });
-
-
+    
     const cartProducts = cartProductData.map((cartProduct) => cartProduct.get({ plain: true }));
 
     res.render('checkout', {

@@ -1,4 +1,13 @@
-const itemElems = document.getElementsByClassName('checkout-product-price').value;
+
+var itemElems = $('.checkout-product-price').map(function(){
+    return this.dataset.price;
+}).get();
+
+function getTotal(arr) {
+    let sum = 0;
+    arr.forEach(function(num){sum+=parseFloat(num) || 0;});
+    return sum;
+} 
 const checkoutHandler = async (event) => {
     event.preventDefault();
 
@@ -19,3 +28,5 @@ if (document.querySelectorAll('.checkout-button')) {
         .querySelectorAll('.checkout-button')
         .forEach(button => button.addEventListener('click', checkoutHandler));
   };
+
+  document.onload = $( "#checkout_total" ).text(getTotal(itemElems));
