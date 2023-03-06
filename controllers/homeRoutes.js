@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Product, User, WishlistProduct, CartProduct } = require('../models');
 const withAuth = require('../utils/auth');
+const { Op } = require("sequelize");
 const { format_category_url, sumArray } = require('../utils/helpers');
 
 // Render homepage
@@ -197,6 +198,62 @@ router.get('/marketplace/product/:id', withAuth, async (req, res) => {
       product,
       logged_in: req.session.logged_in
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Get all products whose name or category include search term
+router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Product }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const productData = await Product.findAll({
+      where: {
+        [Op.or]: [
+          {
+            category: {
+              [Op.like]: `%${req.params.search_term}%`
+            }
+          },
+          {
+            name: {
+              [Op.like]: `%${req.params.search_term}%`
+            }
+          },
+          {
+            description: {
+              [Op.like]: `%${req.params.search_term}%`
+            }
+          }
+        ]
+      },
+      include: [
+        {
+          model: User,
+          attributes: { exclude: ['password'] },
+        },
+      ],
+    });
+
+    if (productData) {
+      const products = productData.map((product) => product.get({ plain: true }));
+      res.render('marketplace', {
+        ...user,
+        products,
+        logged_in: req.session.logged_in
+      });
+    } else {
+      res.render('marketplace', {
+        ...user,
+        logged_in: req.session.logged_in
+      });
+    }
   } catch (err) {
     res.status(500).json(err);
   }

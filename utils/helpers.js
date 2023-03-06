@@ -38,5 +38,8 @@ module.exports = {
       case "Wearable Technology":
         return "wearable.png";
     }
+  },
+  format_search_term: (search_term) => {
+    return search_term.toLowerCase();
   }
 };
