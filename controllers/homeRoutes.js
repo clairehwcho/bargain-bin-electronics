@@ -273,7 +273,6 @@ router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
       ],
     });
 
-
     if (productData) {
       const searchedProducts = productData.map((product) => product.get({ plain: true }));
       res.render('marketplace', {

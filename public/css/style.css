@@ -51,6 +51,10 @@
     width: 100%;
 }
 
+.wrapper {
+    width: 100%;
+}
+
 body {
     background-color: var(--light);
     font-family: 'Roboto', sans-serif;
@@ -225,12 +229,6 @@ main {
     align-items: center;
 }
 
-.login-form label,
-.register-form label,
-.create-listing-form label {
-    font-size: 0.8rem;
-}
-
 .user-form-container p {
     font-size: small;
     margin: 1rem;
@@ -245,9 +243,9 @@ main {
     text-decoration: underline;
 }
 
-.profile-wrapper,
-.marketplace-wrapper {
-    width: 100%;
+.login-form label,
+.register-form label {
+    font-size: 0.8rem;
 }
 
 .profile-side-nav,
@@ -293,6 +291,10 @@ main {
     padding: 0 2rem;
 }
 
+.marketplace-main-top-row {
+    width: 100%;
+}
+
 .create-listing-container {
     display: flex;
     flex-direction: column;
@@ -301,8 +303,8 @@ main {
     width: 50%;
 }
 
-.marketplace-main-top-row {
-    width: 100%;
+.create-listing-form label {
+    font-size: 0.8rem;
 }
 
 .marketplace-main-bottom-row {
@@ -405,19 +407,10 @@ main {
     font-size: 1rem;
 }
 
-.wishlist-wrapper {
-    width: 100%;
-}
-
 .my-account {
     list-style: circle;
     line-height: 2;
 }
-
-.contact-us-wrapper {
-    width: 100%;
-}
-
 
 .contact-us-wrapper ul {
     width: fit-content;
@@ -451,10 +444,6 @@ main {
 
 .contact-us-wrapper p:last-of-type {
     font-size: 1.1rem;
-}
-
-.cart-wrapper {
-    width: 100%;
 }
 
 .cart-product-container {
