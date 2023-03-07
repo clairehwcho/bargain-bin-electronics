@@ -9,7 +9,7 @@
                 <ul>
                     <li class="product-name" id="product-details-name">{{product.name}}</li>
                     <li class="product-price" id="product-details-price">${{product.price}}</li>
-                    <li class="product-category" id="product-details-category">{{format_category product.category}}</li>
+                    <li class="product-category" id="product-details-category">{{format_category_for_product_details product.category}}</li>
                     <li class="product-username" id="product-details-username">Listed by {{product.user.username}}</li>
                     <li class="product-date" id="product-details-date">Listed on {{format_date product.date_created}}
                     </li>

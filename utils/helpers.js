@@ -51,17 +51,11 @@ module.exports = {
         return "category8";
     }
   },
-  format_category: (category) => {
+  format_category_for_product_details: (category) => {
     return category.replace('&amp;', '&');
   },
   format_category_url: (url) => {
     return url.replace('%20', ' ').replace('&', '&amp;');
-  },
-  sumArray: (array) => {
-    let result = array.reduce((a, b) => {
-      return a + b;
-    }, 10);
-    return result;
   },
   render_category_image: (category) => {
     switch (category) {
@@ -83,15 +77,10 @@ module.exports = {
         return "wearable.png";
     }
   },
-  format_search_term: (search_term) => {
-    return search_term.toLowerCase();
-  },
-  is_equal: (a, b) => {
-    if (a == b) {
-      return true;
-    }
-    else {
-      return false;
-    }
+  sumArray: (array) => {
+    let result = array.reduce((a, b) => {
+      return a + b;
+    }, 10);
+    return result;
   }
 };
