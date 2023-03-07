@@ -13,7 +13,14 @@
             </ul>
         </div>
         <div class="card-footer display-flex justify-space-between align-center">
-            <button class="addToCart button-1" data-product_id="{{id}}">Add to cart</button>
+            <button class="add-to-cart-button button-1" data-name = "{{name}}"
+            data-price="{{price}}"
+            data-condition="{{condition}}"
+            data-description="{{description}}"
+            data-date_created="{{date_created}}"
+            data-category="{{category}}"
+            data-product_id="{{id}}"
+            data-seller_username="{{user.username}}">Add to cart</button>
             <button class="remove-from-wishlist-button button-2" data-id="{{id}}">
                 Remove from wishlist
             </button>
