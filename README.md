@@ -5,6 +5,8 @@
 ## Description
 This is an e-commerce marketplace app for buying and selling electronic items. The app is built with Node.js, Express.js to create a RESTful API, Handlebars.js as the templating engine, MySQL and the Sequelize ORM for the database. User must register and sign in to use the marketplace. Once logged-in, user can create a new listing, add an existing listing to either wishlist or cart. User can also search items using the search bar.
 <br>
+The checkout feature is still in progress and will be constantly updating.
+<br>
 You can check out the deployed application from the link below:
 <br>
 [https://bargain-bin-electronics.herokuapp.com/](https://bargain-bin-electronics.herokuapp.com/)
