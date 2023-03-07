@@ -172,7 +172,7 @@ router.get('/marketplace/product/new', withAuth, async (req, res) => {
   }
 });
 
-// Get one product
+// Render product details page
 router.get('/marketplace/product/:id', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -217,11 +217,6 @@ router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
       where: {
         [Op.or]: [
           {
-            category: {
-              [Op.like]: `%${req.params.search_term}%`
-            }
-          },
-          {
             name: {
               [Op.like]: `%${req.params.search_term}%`
             }
@@ -241,11 +236,12 @@ router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
       ],
     });
 
+
     if (productData) {
-      const products = productData.map((product) => product.get({ plain: true }));
+      const searchedProducts = productData.map((product) => product.get({ plain: true }));
       res.render('marketplace', {
         ...user,
-        products,
+        searchedProducts,
         logged_in: req.session.logged_in
       });
     } else {

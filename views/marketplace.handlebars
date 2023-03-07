@@ -11,6 +11,10 @@
             {{#each oneCategoryProducts as |product|}}
             {{> product-card}}
             {{/each}}
+            {{else if searchedProducts}}
+            {{#each searchedProducts as |product|}}
+            {{> product-card}}
+            {{/each}}
             {{else}}
             <p>No item found</p>
             {{/if}}
