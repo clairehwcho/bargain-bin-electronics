@@ -17,7 +17,7 @@ const editListingFormHandler = async (event) => {
         });
 
         if (response.ok) {
-            document.location.replace('/marketplace');
+            document.location.replace(`/marketplace/product/${id}`);
         } else {
             alert(response.statusText);
         }
