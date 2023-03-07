@@ -353,9 +353,13 @@ main {
 }
 
 .card-footer button {
-    width: 45%;
+    min-width: 45%;
     font-size: x-small;
     padding: 1 0.5rem;
+}
+
+.remove-from-cart-button {
+    width: 100%;
 }
 
 .product-details-container {
