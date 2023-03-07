@@ -1,12 +1,15 @@
 <section class="profile-wrapper display-flex">
-    <nav class="profile-nav">
-        <ul>
-            <li>submenu name</li>
-            <li>submenu name</li>
-            <li>submenu name</li>
+    {{> profile-side-nav}}
+    <div class="profile-main">
+        <h3 class="mb-3">My Account</h3>
+        <ul class="my-account">
+            <li>First name: {{first_name}}</li>
+            <li>Last name: {{last_name}}</li>
+            <li>Username: {{username}}</li>
+            <li>Email: {{email}}</li>
+            <li>Address: {{address}}</li>
+            <li>Phone numbers: {{phone_numbers}}</li>
         </ul>
-    </nav>
-    <div class="profile-container">
-      profile content goes here
+    </div>
     </div>
 </section>

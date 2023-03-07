@@ -1,18 +1,18 @@
 const registerFormHandler = async (event) => {
     event.preventDefault();
 
-    const firstName = document.querySelector('#first-name-register').value.trim();
-    const lastName = document.querySelector('#last-name-register').value.trim();
+    const first_name = document.querySelector('#first-name-register').value.trim();
+    const last_name = document.querySelector('#last-name-register').value.trim();
     const username = document.querySelector('#username-register').value.trim();
     const email = document.querySelector('#email-register').value.trim();
     const password = document.querySelector('#password-register').value.trim();
     const address = document.querySelector('#address-register').value.trim();
-    const phoneNumbers = document.querySelector('#phone-numbers-register').value.trim();
+    const phone_numbers = document.querySelector('#phone-numbers-register').value.trim();
 
-    if (firstName && lastName && username && email && password && address && phoneNumbers) {
+    if (first_name && last_name && username && email && password && address && phone_numbers) {
         const response = await fetch('/api/users', {
             method: 'POST',
-            body: JSON.stringify({ firstName, lastName, username, email, password, address, phoneNumbers }),
+            body: JSON.stringify({ first_name, last_name, username, email, password, address, phone_numbers }),
             headers: { 'Content-Type': 'application/json' },
         });
 

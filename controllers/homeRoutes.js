@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { Product, User, WishlistProduct, CartProduct } = require('../models');
 const withAuth = require('../utils/auth');
-const { format_category_url, sumArray} = require('../utils/helpers');
+const { Op } = require("sequelize");
+const { format_category_url } = require('../utils/helpers');
 
 // Render homepage
 router.get('/', async (req, res) => {
@@ -25,6 +26,25 @@ router.get('/profile', withAuth, async (req, res) => {
     const user = userData.get({ plain: true });
 
     res.render('profile', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Render order history page
+router.get('/profile/order-history', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Product }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('order-history', {
       ...user,
       logged_in: true
     });
@@ -68,36 +88,36 @@ router.get('/wishlist', withAuth, async (req, res) => {
 
 // Render cart page
 router.get('/cart', withAuth, async (req, res) => {
-    try {
-      const userData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ['password'] },
-        include: [{ model: Product }],
-      });
-  
-      const user = userData.get({ plain: true });
-  
-      const cartProductData = await CartProduct.findAll({
-        where: {
-          user_id: req.session.user_id,
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Product }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const cartProductData = await CartProduct.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+      include: [
+        {
+          model: User
         },
-        include: [
-          {
-            model: User
-          },
-        ],
-      });
-  
-      const cartProducts = cartProductData.map((cartProduct) => cartProduct.get({ plain: true }));
-  
-      res.render('cart', {
-        ...user,
-        cartProducts,
-        logged_in: req.session.logged_in
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+      ],
+    });
+
+    const cartProducts = cartProductData.map((cartProduct) => cartProduct.get({ plain: true }));
+
+    res.render('cart', {
+      ...user,
+      cartProducts,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 // Render marketplace page
@@ -121,11 +141,11 @@ router.get('/marketplace', withAuth, async (req, res) => {
       ],
     });
 
-    const products = productData.map((product) => product.get({ plain: true }));
+    const allCategoryProducts = productData.map((product) => product.get({ plain: true }));
 
     res.render('marketplace', {
       ...user,
-      products,
+      allCategoryProducts,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -183,6 +203,62 @@ router.get('/marketplace/product/:id', withAuth, async (req, res) => {
   }
 });
 
+// Get all products whose name or category include search term
+router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Product }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const productData = await Product.findAll({
+      where: {
+        [Op.or]: [
+          {
+            category: {
+              [Op.like]: `%${req.params.search_term}%`
+            }
+          },
+          {
+            name: {
+              [Op.like]: `%${req.params.search_term}%`
+            }
+          },
+          {
+            description: {
+              [Op.like]: `%${req.params.search_term}%`
+            }
+          }
+        ]
+      },
+      include: [
+        {
+          model: User,
+          attributes: { exclude: ['password'] },
+        },
+      ],
+    });
+
+    if (productData) {
+      const products = productData.map((product) => product.get({ plain: true }));
+      res.render('marketplace', {
+        ...user,
+        products,
+        logged_in: req.session.logged_in
+      });
+    } else {
+      res.render('marketplace', {
+        ...user,
+        logged_in: req.session.logged_in
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // Get all products of each category
 router.get('/marketplace/:category', withAuth, async (req, res) => {
   try {
@@ -193,8 +269,10 @@ router.get('/marketplace/:category', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
+    const category_name = req.params.category;
+
     const productData = await Product.findAll({
-      where: { category: format_category_url(req.params.category) },
+      where: { category: format_category_url(category_name) },
       include: [
         {
           model: User,
@@ -203,11 +281,12 @@ router.get('/marketplace/:category', withAuth, async (req, res) => {
       ],
     });
 
-    const products = productData.map((product) => product.get({ plain: true }));
+    const oneCategoryProducts = productData.map((product) => product.get({ plain: true }));
 
     res.render('marketplace', {
       ...user,
-      products,
+      oneCategoryProducts,
+      category_name,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -216,9 +295,11 @@ router.get('/marketplace/:category', withAuth, async (req, res) => {
 });
 
 // Render contact us page
-router.get('/contact', (req, res) => {
+router.get('/contact-us', async (req, res) => {
   try {
-    res.render('contact-us');
+    res.render('contact-us', {
+      logged_in: req.session.logged_in
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -264,7 +345,7 @@ router.get('/cart/checkout', withAuth, async (req, res) => {
         },
       ],
     });
-    
+
     const cartProducts = cartProductData.map((cartProduct) => cartProduct.get({ plain: true }));
 
     res.render('checkout', {

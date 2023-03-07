@@ -2,11 +2,17 @@
     {{> marketplace-side-nav}}
     <div class="marketplace-main">
         {{> marketplace-main-top-row}}
-        <div class="marketplace-main-bottom-row display-flex flex-wrap justify-space-between">
-            {{#if products}}
-            {{#each products as |product|}}
+        <div class="marketplace-main-bottom-row display-flex flex-wrap justify-flex-start">
+            {{#if allCategoryProducts}}
+            {{#each allCategoryProducts as |product|}}
             {{> product-card}}
             {{/each}}
+            {{else if oneCategoryProducts}}
+            {{#each oneCategoryProducts as |product|}}
+            {{> product-card}}
+            {{/each}}
+            {{else}}
+            <p>No item found</p>
             {{/if}}
         </div>
     </div>
