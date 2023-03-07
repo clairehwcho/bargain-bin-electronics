@@ -8,7 +8,24 @@ module.exports = {
     return parseInt(amount).toLocaleString();
   },
   format_category_for_creating_list: (category) => {
-    return category.replace('&', '&amp;');
+    switch (category) {
+      case "category1":
+        return "TV &amp; Home Theater";
+      case "category2":
+        return "Computers &amp; Tablets";
+      case "category3":
+        return "Camera, Photo &amp; Video";
+      case "category4":
+        return "Cell Phones &amp; Accessories";
+      case "category5":
+        return "Headphones &amp; Audio";
+      case "category6":
+        return "Car Electronics";
+      case "category7":
+        return "Health &amp; Wellness";
+      case "category8":
+        return "Wearable Technology";
+    }
   },
   format_category: (category) => {
     return category.replace('And', '&amp;');
