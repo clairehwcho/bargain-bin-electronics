@@ -141,11 +141,11 @@ router.get('/marketplace', withAuth, async (req, res) => {
       ],
     });
 
-    const products = productData.map((product) => product.get({ plain: true }));
+    const allCategoryProducts = productData.map((product) => product.get({ plain: true }));
 
     res.render('marketplace', {
       ...user,
-      products,
+      allCategoryProducts,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -269,8 +269,10 @@ router.get('/marketplace/:category', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
+    const category_name = req.params.category;
+
     const productData = await Product.findAll({
-      where: { category: format_category_url(req.params.category) },
+      where: { category: format_category_url(category_name) },
       include: [
         {
           model: User,
@@ -279,11 +281,12 @@ router.get('/marketplace/:category', withAuth, async (req, res) => {
       ],
     });
 
-    const products = productData.map((product) => product.get({ plain: true }));
+    const oneCategoryProducts = productData.map((product) => product.get({ plain: true }));
 
     res.render('marketplace', {
       ...user,
-      products,
+      oneCategoryProducts,
+      category_name,
       logged_in: req.session.logged_in
     });
   } catch (err) {
