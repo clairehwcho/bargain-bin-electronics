@@ -7,8 +7,11 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
+  format_category_for_creating_list: (category) => {
+    return category.replace('&', '&amp;');
+  },
   format_category: (category) => {
-    return category.replace('&amp;', '&');
+    return category.replace('And', '&amp;');
   },
   format_category_url: (url) => {
     return url.replace('%20', ' ').replace('&', '&amp;');

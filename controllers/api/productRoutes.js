@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Product, User } = require('../../models');
 const withAuth = require('../../utils/auth');
+const { format_category_for_creating_list } = require('../../utils/helpers');
 
 // Get all products
 router.get('/', withAuth, async (req, res) => {
@@ -28,7 +29,7 @@ router.post('/', withAuth, async (req, res) => {
       price: req.body.price,
       condition: req.body.condition,
       description: req.body.description,
-      category: req.body.category,
+      category: format_category_for_creating_list(req.body.category),
       user_id: req.session.user_id,
     });
 

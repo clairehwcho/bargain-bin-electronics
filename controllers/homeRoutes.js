@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Product, User, WishlistProduct, CartProduct } = require('../models');
 const withAuth = require('../utils/auth');
 const { Op } = require("sequelize");
-const { format_category_url, sumArray } = require('../utils/helpers');
+const { format_category_url } = require('../utils/helpers');
 
 // Render homepage
 router.get('/', async (req, res) => {
