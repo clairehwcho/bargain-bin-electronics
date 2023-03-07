@@ -1,3 +1,9 @@
+const Handlebars = require("handlebars");
+
+Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
 module.exports = {
   format_date: (date) => {
     return date.toLocaleDateString();
@@ -5,7 +11,7 @@ module.exports = {
   format_amount: (amount) => {
     return parseInt(amount).toLocaleString();
   },
-  format_category_for_creating_list: (category) => {
+  convert_category_number_to_name: (category) => {
     switch (category) {
       case "category1":
         return "TV &amp; Home Theater";
@@ -23,6 +29,26 @@ module.exports = {
         return "Health &amp; Wellness";
       case "category8":
         return "Wearable Technology";
+    }
+  },
+  convert_category_name_to_number: (category) => {
+    switch (category) {
+      case "TV &amp; Home Theater":
+        return "category1";
+      case "Computers &amp; Tablets":
+        return "category2";
+      case "Camera, Photo &amp; Video":
+        return "category3";
+      case "Cell Phones &amp; Accessories":
+        return "category4";
+      case "Headphones &amp; Audio":
+        return "category5";
+      case "Car Electronics":
+        return "category6";
+      case "Health &amp; Wellness":
+        return "category7";
+      case "Wearable Technology":
+        return "category8";
     }
   },
   format_category: (category) => {
@@ -59,5 +85,13 @@ module.exports = {
   },
   format_search_term: (search_term) => {
     return search_term.toLowerCase();
+  },
+  is_equal: (a, b) => {
+    if (a == b) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 };

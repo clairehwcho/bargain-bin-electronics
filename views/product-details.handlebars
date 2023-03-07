@@ -17,16 +17,23 @@
                     <li class="product-description" id="product-details-description">{{product.description}}</li>
                 </ul>
                 <div class="product-details-btn-container p-3">
-                    <button class="add-to-cart-button button-1" data-name="{{product.name}}" data-price="{{product.price}}"
-                        data-condition="{{product.condition}}" data-description="{{product.description}}"
-                        data-date_created="{{product.date_created}}" data-category="{{product.category}}" data-product_id="{{product.id}}"
+                    {{#ifEquals product.user_id id}}
+                    <button class="edit-product-button button-1" data-id="{{product.id}}">Edit</button>
+                    <button class="delete-product-button button-1" data-id="{{product.id}}">Delete</button>
+                    {{else}}
+                    <button class="add-to-cart-button button-1" data-name="{{product.name}}"
+                        data-price="{{product.price}}" data-condition="{{product.condition}}"
+                        data-description="{{product.description}}" data-date_created="{{product.date_created}}"
+                        data-category="{{product.category}}" data-product_id="{{product.id}}"
                         data-seller_username="{{product.user.username}}">Add to cart</button>
-                    <button class="add-to-wishlist-button button-1" data-name="{{product.name}}" data-price="{{product.price}}"
-                        data-condition="{{product.condition}}" data-description="{{product.description}}"
-                        data-date_created="{{product.date_created}}" data-category="{{product.category}}" data-product_id="{{product.id}}"
+                    <button class="add-to-wishlist-button button-1" data-name="{{product.name}}"
+                        data-price="{{product.price}}" data-condition="{{product.condition}}"
+                        data-description="{{product.description}}" data-date_created="{{product.date_created}}"
+                        data-category="{{product.category}}" data-product_id="{{product.id}}"
                         data-seller_username="{{product.user.username}}">
                         Add to wishlist
                     </button>
+                    {{/ifEquals}}
                     <a href="/marketplace"><button class="button-2">Return to
                             listings</button></a>
                 </div>
@@ -37,3 +44,4 @@
 
 <script src="/js/wishlist.js"></script>
 <script src="/js/cart.js"></script>
+<script src="/js/product.js"></script>

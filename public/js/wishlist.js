@@ -43,7 +43,7 @@ const removeFromWishlistButtonHandler = async (event) => {
     const id = event.target.getAttribute('data-id');
 
     if (id) {
-        const response = await fetch(`api/wishlistProducts/${id}`, {
+        const response = await fetch(`/api/wishlistProducts/${id}`, {
             method: 'DELETE',
         });
 

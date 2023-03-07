@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Product, User } = require('../../models');
 const withAuth = require('../../utils/auth');
-const { format_category_for_creating_list } = require('../../utils/helpers');
+const { convert_category_number_to_name } = require('../../utils/helpers');
 
 // Get all products
 router.get('/', withAuth, async (req, res) => {
@@ -29,7 +29,7 @@ router.post('/', withAuth, async (req, res) => {
       price: req.body.price,
       condition: req.body.condition,
       description: req.body.description,
-      category: format_category_for_creating_list(req.body.category),
+      category: convert_category_number_to_name(req.body.category),
       user_id: req.session.user_id,
     });
 
@@ -45,6 +45,11 @@ router.put('/:id', withAuth, async (req, res) => {
     const productData = await Product.findByPk(req.params.id);
     const productUpdate = productData.update({
       ...req.body,
+      name: req.body.name,
+      price: req.body.price,
+      condition: req.body.condition,
+      description: req.body.description,
+      category: convert_category_number_to_name(req.body.category),
     });
 
     req.session.save(() => {
