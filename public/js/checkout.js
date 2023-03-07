@@ -1,5 +1,5 @@
 
-var itemElems = $('.checkout-product-price').map(function () {
+const itemElems = $('.checkout-product-price').map(function () {
     return this.dataset.price;
 }).get();
 

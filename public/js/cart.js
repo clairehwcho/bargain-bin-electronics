@@ -43,7 +43,7 @@ const removeFromCartButtonHandler = async (event) => {
     const id = event.target.getAttribute('data-id');
 
     if (id) {
-        const response = await fetch(`api/cartProducts/${id}`, {
+        const response = await fetch(`/api/cartProducts/${id}`, {
             method: 'DELETE',
         });
 
