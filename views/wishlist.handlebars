@@ -1,14 +1,16 @@
 <section class="wishlist-wrapper wrapper display-flex flex-column align-center">
     <h3 class="mb-3">Your wishlist</h3>
+    {{#if wishlistProducts}}
     <div class="wishlist-product-container">
-        {{#if wishlistProducts}}
         {{#each wishlistProducts as |wishlistProduct|}}
         {{> wishlist-card}}
         {{/each}}
-        {{else}}
-        <p>Your wishlist is empty.</p>
-        {{/if}}
     </div>
+    {{else}}
+    <div class="display-flex justify-center">
+        <p>Your wishlist is empty.</p>
+    </div>
+    {{/if}}
 </section>
 
 <script src="/js/wishlist.js"></script>
