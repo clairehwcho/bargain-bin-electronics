@@ -19,29 +19,14 @@ User.init(
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Please enter your first name.'
-        }
-      }
     },
     last_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Please enter your last name.'
-        }
-      }
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Please enter your username.'
-        }
-      }
     },
     email: {
       type: DataTypes.STRING,
@@ -61,20 +46,10 @@ User.init(
     address: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Please enter your address.'
-        }
-      }
     },
     phone_numbers: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Please enter your phone numbers.'
-        }
-      }
     }
   },
   {
