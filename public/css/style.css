@@ -251,7 +251,7 @@ main {
 
 .profile-side-nav,
 .marketplace-side-nav {
-    width: 20%;
+    width: 260px;
     background-color: var(--light);
     border: none;
     border-radius: var(--border-radius);
