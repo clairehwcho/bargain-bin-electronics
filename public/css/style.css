@@ -309,7 +309,8 @@ main {
 }
 
 .marketplace-main-bottom-row,
-.wishlist-product-container {
+.wishlist-product-container,
+.cart-product-container {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, 250px);
@@ -483,11 +484,17 @@ main {
 }
 
 .cart-product-container {
-    width: 60%;
+    width: 70%;
+}
+
+.cart-product-container .remove-from-cart-button {
+    width: 100%;
+    font-size: 1rem;
 }
 
 .checkout-button-container {
-    width: 50%;
+    width: 70%;
+    margin-top: 1rem;
 }
 
 .checkout-table {
