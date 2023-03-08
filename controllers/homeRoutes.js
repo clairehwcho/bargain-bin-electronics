@@ -137,7 +137,8 @@ router.get('/marketplace', withAuth, async (req, res) => {
     const productData = await Product.findAll({
       include: [
         {
-          model: User
+          model: User,
+          attributes: { exclude: ['password'] },
         }
       ],
     });
@@ -178,7 +179,11 @@ router.get('/marketplace/product/:id', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
     });
 
     const user = userData.get({ plain: true });
@@ -292,12 +297,16 @@ router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
   }
 });
 
-// Get all products of each category
+// Render each marketplace category page
 router.get('/marketplace/:category', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
     });
 
     const user = userData.get({ plain: true });
