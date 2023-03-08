@@ -39,7 +39,6 @@ router.post('/', async (req, res) => {
     req.session.logged_in = true;
     res.status(201).json(userData);
   } catch (err) {
-    console.log(err);
     res.status(400).json({ error: err.message });
   }
 });
