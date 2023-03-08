@@ -1,5 +1,5 @@
 <a href="/marketplace/product/{{product_id}}">
-    <div class="product-card flex-column justify-center align-center m-1 p-2">
+    <div class="product-card flex-column justify-center align-center p-3">
         <div class="card-header p-2">
             <img src="/images/{{render_category_image category}}">
         </div>
@@ -13,17 +13,28 @@
             </ul>
         </div>
         <div class="card-footer display-flex justify-space-between align-center">
-            <button class="add-to-cart-button button-1" data-name = "{{name}}"
-            data-price="{{price}}"
-            data-condition="{{condition}}"
-            data-description="{{description}}"
-            data-date_created="{{date_created}}"
-            data-category="{{category}}"
-            data-product_id="{{id}}"
-            data-seller_username="{{user.username}}">Add to cart</button>
             <button class="remove-from-wishlist-button button-2" data-id="{{id}}">
                 Remove from wishlist
             </button>
+            {{#if @root.cart_products}}
+            {{#ifInArrayOfObj "product_id" id @root.cart_products}}
+            <button class="remove-from-cart-button button-3" data-id="{{find_id_by_product_id id @root.cart_products}}">
+                Remove from cart
+            </button>
+            {{else}}
+            <button class="add-to-cart-button button-1" data-name="{{name}}" data-price="{{price}}"
+                data-condition="{{condition}}" data-description="{{description}}" data-date_created="{{date_created}}"
+                data-category="{{category}}" data-product_id="{{id}}" data-seller_username="{{user.username}}">
+                Add to cart
+            </button>
+            {{/ifInArrayOfObj}}
+            {{else}}
+            <button class="add-to-cart-button button-1" data-name="{{name}}" data-price="{{price}}"
+                data-condition="{{condition}}" data-description="{{description}}" data-date_created="{{date_created}}"
+                data-category="{{category}}" data-product_id="{{id}}" data-seller_username="{{user.username}}">
+                Add to cart
+            </button>
+            {{/if}}
         </div>
     </div>
 </a>

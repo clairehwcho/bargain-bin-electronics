@@ -308,7 +308,8 @@ main {
     font-size: 0.8rem;
 }
 
-.marketplace-main-bottom-row {
+.marketplace-main-bottom-row,
+.wishlist-product-container {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, 250px);

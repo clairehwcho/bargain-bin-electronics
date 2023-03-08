@@ -58,7 +58,11 @@ router.get('/wishlist', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
     });
 
     const user = userData.get({ plain: true });
@@ -69,7 +73,8 @@ router.get('/wishlist', withAuth, async (req, res) => {
       },
       include: [
         {
-          model: User
+          model: User,
+          attributes: { exclude: ['password'] },
         },
       ],
     });
@@ -91,7 +96,11 @@ router.get('/cart', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
     });
 
     const user = userData.get({ plain: true });
@@ -102,7 +111,8 @@ router.get('/cart', withAuth, async (req, res) => {
       },
       include: [
         {
-          model: User
+          model: User,
+          attributes: { exclude: ['password'] },
         },
       ],
     });
