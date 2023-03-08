@@ -251,7 +251,11 @@ router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
     });
 
     const user = userData.get({ plain: true });
