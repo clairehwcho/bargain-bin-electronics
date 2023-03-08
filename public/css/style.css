@@ -257,11 +257,13 @@ main {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     padding: 1.5rem;
+    line-height: 2;
 }
 
 .profile-side-nav h6,
 .marketplace-side-nav h6 {
     font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 .profile-side-nav ul,
