@@ -1,3 +1,26 @@
+const Handlebars = require("handlebars");
+
+Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper('ifInArrayOfObj', function (key, val, arrayOfObj, options) {
+  for (let i = 0; i < arrayOfObj.length; i++) {
+    const currentObj = arrayOfObj[i];
+    if (currentObj[key] === val) {
+      return options.fn(this)
+    }
+  }
+  return options.inverse(this);
+});
+
+Handlebars.registerHelper('ifInObj', function (key, val, obj, options) {
+  if (obj[key] === val) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+
 module.exports = {
   format_date: (date) => {
     return date.toLocaleDateString();
@@ -5,7 +28,7 @@ module.exports = {
   format_amount: (amount) => {
     return parseInt(amount).toLocaleString();
   },
-  format_category_for_creating_list: (category) => {
+  convert_category_number_to_name: (category) => {
     switch (category) {
       case "category1":
         return "TV &amp; Home Theater";
@@ -25,17 +48,31 @@ module.exports = {
         return "Wearable Technology";
     }
   },
-  format_category: (category) => {
+  convert_category_name_to_number: (category) => {
+    switch (category) {
+      case "TV &amp; Home Theater":
+        return "category1";
+      case "Computers &amp; Tablets":
+        return "category2";
+      case "Camera, Photo &amp; Video":
+        return "category3";
+      case "Cell Phones &amp; Accessories":
+        return "category4";
+      case "Headphones &amp; Audio":
+        return "category5";
+      case "Car Electronics":
+        return "category6";
+      case "Health &amp; Wellness":
+        return "category7";
+      case "Wearable Technology":
+        return "category8";
+    }
+  },
+  format_category_for_product_details: (category) => {
     return category.replace('&amp;', '&');
   },
   format_category_url: (url) => {
     return url.replace('%20', ' ').replace('&', '&amp;');
-  },
-  sumArray: (array) => {
-    let result = array.reduce((a, b) => {
-      return a + b;
-    }, 10);
-    return result;
   },
   render_category_image: (category) => {
     switch (category) {
@@ -57,7 +94,25 @@ module.exports = {
         return "wearable.png";
     }
   },
-  format_search_term: (search_term) => {
-    return search_term.toLowerCase();
+  sumArray: (array) => {
+    let result = array.reduce((a, b) => {
+      return a + b;
+    }, 10);
+    return result;
+  },
+  find_id_by_product_id: (id, arrayOfObj) => {
+    for (let i = 0; i < arrayOfObj.length; i++) {
+      const currentObj = arrayOfObj[i];
+      if (currentObj['product_id'] === id) {
+        return currentObj['id']
+      }
+    }
+    return null;
+  },
+  format_product_card_name: (name) => {
+    if (name.length > 23) {
+      return name.slice(0, 24) + "..."
+    }
+    return name;
   }
 };

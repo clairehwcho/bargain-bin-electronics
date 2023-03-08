@@ -28,6 +28,11 @@ router.get('/:product_id', withAuth, async (req, res) => {
             }
         });
 
+        if (!cartProductData) {
+            res.status(404).json({ message: 'No cartProduct found with this id!' });
+            return;
+        }
+
         const cartProduct = cartProductData.get({ plain: true });
 
         res.status(200).json(cartProduct);

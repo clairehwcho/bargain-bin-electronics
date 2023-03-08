@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Product, User, WishlistProduct, CartProduct } = require('../models');
 const withAuth = require('../utils/auth');
 const { Op } = require("sequelize");
-const { format_category_url } = require('../utils/helpers');
+const { format_category_url, convert_category_name_to_number } = require('../utils/helpers');
 
 // Render homepage
 router.get('/', async (req, res) => {
@@ -58,7 +58,11 @@ router.get('/wishlist', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
     });
 
     const user = userData.get({ plain: true });
@@ -69,7 +73,8 @@ router.get('/wishlist', withAuth, async (req, res) => {
       },
       include: [
         {
-          model: User
+          model: User,
+          attributes: { exclude: ['password'] },
         },
       ],
     });
@@ -91,7 +96,11 @@ router.get('/cart', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
     });
 
     const user = userData.get({ plain: true });
@@ -102,7 +111,8 @@ router.get('/cart', withAuth, async (req, res) => {
       },
       include: [
         {
-          model: User
+          model: User,
+          attributes: { exclude: ['password'] },
         },
       ],
     });
@@ -127,7 +137,8 @@ router.get('/marketplace', withAuth, async (req, res) => {
       attributes: { exclude: ['password'] },
       include: [
         { model: Product },
-        { model: WishlistProduct }
+        { model: WishlistProduct },
+        { model: CartProduct }
       ],
     });
 
@@ -136,16 +147,17 @@ router.get('/marketplace', withAuth, async (req, res) => {
     const productData = await Product.findAll({
       include: [
         {
-          model: User
-        },
+          model: User,
+          attributes: { exclude: ['password'] },
+        }
       ],
     });
 
-    const allCategoryProducts = productData.map((product) => product.get({ plain: true }));
+    const products = productData.map((product) => product.get({ plain: true }));
 
     res.render('marketplace', {
       ...user,
-      allCategoryProducts,
+      products,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -177,6 +189,44 @@ router.get('/marketplace/product/:id', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const productData = await Product.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: { exclude: ['password'] },
+        },
+      ],
+    });
+
+    const product = productData.get({ plain: true });
+
+    const category = convert_category_name_to_number(product.category);
+
+    res.render('product-details', {
+      ...user,
+      product,
+      category,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Render edit listing page
+router.get('/marketplace/product/edit/:id', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
       include: [{ model: Product }],
     });
 
@@ -193,9 +243,12 @@ router.get('/marketplace/product/:id', withAuth, async (req, res) => {
 
     const product = productData.get({ plain: true });
 
-    res.render('product-details', {
+    const category = convert_category_name_to_number(product.category)
+
+    res.render('edit-listing', {
       ...user,
       product,
+      category,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -203,12 +256,16 @@ router.get('/marketplace/product/:id', withAuth, async (req, res) => {
   }
 });
 
-// Get all products whose name or category include search term
+// Render search result page
 router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
     });
 
     const user = userData.get({ plain: true });
@@ -236,12 +293,11 @@ router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
       ],
     });
 
-
     if (productData) {
-      const searchedProducts = productData.map((product) => product.get({ plain: true }));
+      const products = productData.map((product) => product.get({ plain: true }));
       res.render('marketplace', {
         ...user,
-        searchedProducts,
+        products,
         logged_in: req.session.logged_in
       });
     } else {
@@ -255,12 +311,16 @@ router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
   }
 });
 
-// Get all products of each category
+// Render each marketplace category page
 router.get('/marketplace/:category', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Product }],
+      include: [
+        { model: Product },
+        { model: WishlistProduct },
+        { model: CartProduct }
+      ],
     });
 
     const user = userData.get({ plain: true });
@@ -277,11 +337,11 @@ router.get('/marketplace/:category', withAuth, async (req, res) => {
       ],
     });
 
-    const oneCategoryProducts = productData.map((product) => product.get({ plain: true }));
+    const products = productData.map((product) => product.get({ plain: true }));
 
     res.render('marketplace', {
       ...user,
-      oneCategoryProducts,
+      products,
       category_name,
       logged_in: req.session.logged_in
     });

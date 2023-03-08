@@ -1,11 +1,11 @@
 [
   {
-    "first_name": "Test",
+    "first_name": "Guest",
     "last_name": "User",
-    "username": "testuser",
-    "email": "test@gmail.com",
+    "username": "guestuser",
+    "email": "guest@email.com",
     "password": "1234",
-    "address": "Bellevue, WA",
+    "address": "Seattle, WA",
     "phone_numbers": "0123456789"
   },
   {

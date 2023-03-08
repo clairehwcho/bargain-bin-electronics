@@ -1,14 +1,17 @@
-<section class="cart-wrapper display-flex flex-column align-center">
-    <h3>Your cart</h3>
-    <div class="cart-product-container display-flex flex-wrap justify-center">
-        {{#if cartProducts}}
+<section class="cart-wrapper wrapper display-flex flex-column align-center">
+    <h3 class="mb-3">Your cart</h3>
+    {{#if cartProducts}}
+    <div class="cart-product-container">
         {{#each cartProducts as |cartProduct|}}
         {{> cart-card}}
         {{/each}}
-        {{else}}
-        <p>Your cart is empty.</p>
-        {{/if}}
     </div>
+    {{else}}
+    <div class="display-flex justify-center">
+        <p>Your cart is empty.</p>
+    </div>
+
+    {{/if}}
     {{#if cartProducts}}
     <div class="checkout-button-container p-1">
         <button class="checkout-button button-1 button-long">Checkout</button>

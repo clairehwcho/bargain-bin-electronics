@@ -1,18 +1,10 @@
-<section class="marketplace-wrapper display-flex">
+<section class="marketplace-wrapper wrapper display-flex">
     {{> marketplace-side-nav}}
     <div class="marketplace-main">
         {{> marketplace-main-top-row}}
-        <div class="marketplace-main-bottom-row display-flex flex-wrap justify-flex-start">
-            {{#if allCategoryProducts}}
-            {{#each allCategoryProducts as |product|}}
-            {{> product-card}}
-            {{/each}}
-            {{else if oneCategoryProducts}}
-            {{#each oneCategoryProducts as |product|}}
-            {{> product-card}}
-            {{/each}}
-            {{else if searchedProducts}}
-            {{#each searchedProducts as |product|}}
+        <div class="marketplace-main-bottom-row">
+            {{#if products}}
+            {{#each products as |product|}}
             {{> product-card}}
             {{/each}}
             {{else}}
@@ -24,3 +16,4 @@
 
 <script src="/js/wishlist.js"></script>
 <script src="/js/cart.js"></script>
+<script src="/js/product.js"></script>

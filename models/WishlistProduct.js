@@ -53,7 +53,7 @@ WishlistProduct.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'product_wishlist',
+        modelName: 'wishlist_product',
     }
 );
 

@@ -39,15 +39,20 @@
     background-color: var(--dark);
     border: none;
     border-radius: var(--border-radius);
-    opacity: 1;
+    opacity: 0.8;
 }
 
 .button-1:hover,
-.button-2:hover {
+.button-2:hover,
+.button-3:hover {
     opacity: 1;
 }
 
 .button-long {
+    width: 100%;
+}
+
+.wrapper {
     width: 100%;
 }
 
@@ -225,12 +230,6 @@ main {
     align-items: center;
 }
 
-.login-form label,
-.register-form label,
-.create-listing-form label {
-    font-size: 0.8rem;
-}
-
 .user-form-container p {
     font-size: small;
     margin: 1rem;
@@ -245,24 +244,26 @@ main {
     text-decoration: underline;
 }
 
-.profile-wrapper,
-.marketplace-wrapper {
-    width: 100%;
+.login-form label,
+.register-form label {
+    font-size: 0.8rem;
 }
 
 .profile-side-nav,
 .marketplace-side-nav {
-    width: 20%;
+    width: 260px;
     background-color: var(--light);
     border: none;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     padding: 1.5rem;
+    line-height: 2;
 }
 
 .profile-side-nav h6,
 .marketplace-side-nav h6 {
     font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 .profile-side-nav ul,
@@ -293,6 +294,10 @@ main {
     padding: 0 2rem;
 }
 
+.marketplace-main-top-row {
+    width: 100%;
+}
+
 .create-listing-container {
     display: flex;
     flex-direction: column;
@@ -301,17 +306,23 @@ main {
     width: 50%;
 }
 
-.marketplace-main-top-row {
-    width: 100%;
+.create-listing-form label {
+    font-size: 0.8rem;
 }
 
-.marketplace-main-bottom-row {
+.marketplace-main-bottom-row,
+.wishlist-product-container,
+.cart-product-container {
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    grid-gap: 1rem;
+    justify-content: space-between;
 }
 
 .product-card {
     width: 250px;
-    height: 300px;
+    height: 330px;
 }
 
 .product-card:hover {
@@ -353,10 +364,17 @@ main {
 }
 
 .card-footer button {
-    min-width: 45%;
+    height: 40px;
     font-size: x-small;
     padding: 1 0.5rem;
 }
+
+.card-footer .add-to-wishlist-button,
+.card-footer .add-to-cart-button,
+.card-footer .remove-from-wishlist-button,
+.card-footer .remove-from-cart-button {
+    width: 100px;
+};
 
 .remove-from-cart-button {
     width: 100%;
@@ -367,19 +385,26 @@ main {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    background-color: var(--light);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
 }
 
 .category-image {
-    width: 30%;
+    width: 40%;
     height: 100%;
 }
 
 .category-image img {
     width: 100%;
+    height: 100%;
 }
 
 .product-details {
-    width: 70%;
+    width: 60%;
+
 }
 
 #product-details-name {
@@ -391,17 +416,33 @@ main {
     font-weight: bold;
 }
 
-#product-details-category,
-#product-details-username,
-#product-details-date {
-    font-size: 0.8rem;
+#product-details-category {
+    font-style: italic;
+    font-weight: bold;
 }
 
+#product-details-category,
+#product-details-username,
+#product-details-date,
 #product-details-condition {
     font-size: 1rem;
 }
 
-.wishlist-wrapper {
+.product-details-btn-container button {
+    width: 48%;
+    font-size: 0.7rem;
+}
+
+.product-details-btn-container-row {
+    display:flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+.product-details-btn-container-row a {
+    width: 100%;
+}
+
+.product-details-btn-container-row .return-to-listing-button {
     width: 100%;
 }
 
@@ -409,11 +450,6 @@ main {
     list-style: circle;
     line-height: 2;
 }
-
-.contact-us-wrapper {
-    width: 100%;
-}
-
 
 .contact-us-wrapper ul {
     width: fit-content;
@@ -449,16 +485,18 @@ main {
     font-size: 1.1rem;
 }
 
-.cart-wrapper {
-    width: 100%;
+.cart-product-container {
+    width: 70%;
 }
 
-.cart-product-container {
-    width: 60%;
+.cart-product-container .remove-from-cart-button {
+    width: 100%;
+    font-size: 1rem;
 }
 
 .checkout-button-container {
-    width: 50%;
+    width: 70%;
+    margin-top: 1rem;
 }
 
 .checkout-table {
