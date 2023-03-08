@@ -4,10 +4,6 @@ Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
-Handlebars.registerHelper('ifNotEquals', function (arg1, arg2, options) {
-  return (arg1 !== arg2) ? options.fn(this) : options.inverse(this);
-});
-
 Handlebars.registerHelper('ifInArrayOfObj', function (key, val, arrayOfObj, options) {
   for (let i = 0; i < arrayOfObj.length; i++) {
     const currentObj = arrayOfObj[i];
