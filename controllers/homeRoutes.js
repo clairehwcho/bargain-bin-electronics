@@ -127,7 +127,8 @@ router.get('/marketplace', withAuth, async (req, res) => {
       attributes: { exclude: ['password'] },
       include: [
         { model: Product },
-        { model: WishlistProduct }
+        { model: WishlistProduct },
+        { model: CartProduct }
       ],
     });
 
@@ -137,15 +138,15 @@ router.get('/marketplace', withAuth, async (req, res) => {
       include: [
         {
           model: User
-        },
+        }
       ],
     });
 
-    const allCategoryProducts = productData.map((product) => product.get({ plain: true }));
+    const products = productData.map((product) => product.get({ plain: true }));
 
     res.render('marketplace', {
       ...user,
-      allCategoryProducts,
+      products,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -274,10 +275,10 @@ router.get('/marketplace/search/:search_term', withAuth, async (req, res) => {
     });
 
     if (productData) {
-      const searchedProducts = productData.map((product) => product.get({ plain: true }));
+      const products = productData.map((product) => product.get({ plain: true }));
       res.render('marketplace', {
         ...user,
-        searchedProducts,
+        products,
         logged_in: req.session.logged_in
       });
     } else {
@@ -313,11 +314,11 @@ router.get('/marketplace/:category', withAuth, async (req, res) => {
       ],
     });
 
-    const oneCategoryProducts = productData.map((product) => product.get({ plain: true }));
+    const products = productData.map((product) => product.get({ plain: true }));
 
     res.render('marketplace', {
       ...user,
-      oneCategoryProducts,
+      products,
       category_name,
       logged_in: req.session.logged_in
     });

@@ -1,7 +1,28 @@
 const Handlebars = require("handlebars");
 
-Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper('ifNotEquals', function (arg1, arg2, options) {
+  return (arg1 !== arg2) ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper('ifInArrayOfObj', function (key, val, arrayOfObj, options) {
+  for (let i = 0; i < arrayOfObj.length; i++) {
+    const currentObj = arrayOfObj[i];
+    if (currentObj[key] === val) {
+      return options.fn(this)
+    }
+  }
+  return options.inverse(this);
+});
+
+Handlebars.registerHelper('ifInObj', function (key, val, obj, options) {
+  if (obj[key] === val) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
 });
 
 module.exports = {
@@ -82,5 +103,20 @@ module.exports = {
       return a + b;
     }, 10);
     return result;
+  },
+  find_id_by_product_id: (id, arrayOfObj) => {
+    for (let i = 0; i < arrayOfObj.length; i++) {
+      const currentObj = arrayOfObj[i];
+      if (currentObj['product_id'] === id) {
+        return currentObj['id']
+      }
+    }
+    return null;
+  },
+  format_product_card_name: (name) => {
+    if (name.length > 23) {
+      return name.slice(0, 24) + "..."
+    }
+    return name;
   }
 };

@@ -10,17 +10,6 @@ const addToWishlistButtonHandler = async (event) => {
     const product_id = event.target.getAttribute('data-product_id');
     const seller_username = event.target.getAttribute('data-seller_username');
 
-    if (product_id) {
-        const response = await fetch(`/api/wishlistProducts/${product_id}`, {
-            method: 'GET'
-        });
-
-        if (response.ok) {
-            alert("This product is already in your wishlist.");
-            return;
-        };
-    };
-
     if (name && price && condition && description && date_created && category && product_id && seller_username) {
         const response = await fetch('/api/wishlistProducts', {
             method: 'POST',
@@ -29,7 +18,6 @@ const addToWishlistButtonHandler = async (event) => {
         });
 
         if (response.ok) {
-            alert("This product is added to your wishlist.");
             document.location.reload();
         } else {
             alert(response.statusText);
