@@ -3,7 +3,7 @@
 
 <!-- omit in toc -->
 ## Description
-This is an e-commerce marketplace app for buying and selling electronic items. The app is built with Node.js, Express.js to create a RESTful API, Handlebars.js as the templating engine, MySQL and the Sequelize ORM for the database. User must register and sign in to use the marketplace. Once logged-in, user can create a new listing, add an existing listing to either wishlist or cart. User can also search items using the search bar.
+This is an e-commerce marketplace app for buying and selling electronic items. The app is built with Node.js, Express.js to create a RESTful API, Handlebars.js as the templating engine, MySQL and the Sequelize ORM for the database. User must register and sign in to use the marketplace. Once logged-in, user can create, edit and delete listing, add an existing listing to either wishlist or cart. User can also search items using the search bar.
 <br>
 The checkout feature is still in progress and will be constantly updating.
 <br>
@@ -68,6 +68,10 @@ Project is created with:
 - Marketplace page
 ![screenshot of marketplace page](public/images/screenshot_marketplace.jpeg)
 - Product details page
+![screenshot of product details page](public/images/screenshot_create.jpeg)
+- Create listing page
+![screenshot of create listing page](public/images/screenshot_edit.jpeg)
+- Edit listing page
 ![screenshot of product details page](public/images/screenshot_product_details.jpeg)
 - Wishlist page
 ![screenshot of wishlist page](public/images/screenshot_wishlist.jpeg)
